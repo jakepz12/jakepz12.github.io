@@ -64,5 +64,28 @@
   <script src="../js/main.js"></script>
   <script src="../js/scroll-animations.js"></script>
   <script src="../js/ui.js"></script>
+  <script>
+  const form = document.getElementById('reservation-form');
+  const toast = document.getElementById('toast');
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      try {
+        const res = await fetch('../backend/reservations.php', { method: 'POST', body: data });
+        const json = await res.json();
+        const msg = json.message || (json.ok ? 'Заявка принята' : 'Ошибка');
+        toast.textContent = msg;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2800);
+        if (json.ok) form.reset();
+      } catch (err) {
+        toast.textContent = 'Сервер недоступен';
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2800);
+      }
+    });
+  }
+  </script>
 </body>
 </html>

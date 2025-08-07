@@ -21,3 +21,21 @@ NOIR — Черно‑белый ресторанный сайт
 - Canvas‑анимация на главной (`js/canvas-hero.js`).
 - Появление блоков при скролле (`js/scroll-animations.js`).
 - «Магнитные» кнопки (`js/ui.js`).
+
+Бэкенд (PHP + MySQL)
+1) Создайте БД через phpMyAdmin (логин: root, пароль: пусто):
+   - Откройте phpMyAdmin и выполните SQL из `backend/schema.sql` (вкладка SQL)
+2) Конфиг подключения: `backend/config.php`
+   - По умолчанию: host=localhost, user=root, pass='', db=noir_restaurant
+3) Маршруты/страницы:
+   - Регистрация: `pages/register.php`
+   - Вход: `pages/login.php`
+   - Личный кабинет: `pages/account.php`
+   - Бронирование (API): `backend/reservations.php`
+   - Админ: `pages/admin/index.php`, `pages/admin/users.php`
+
+Запуск с PHP (локально)
+- Поднимите PHP dev-сервер из корня проекта:
+  `php -S localhost:8001 -t .`
+- Откройте `http://localhost:8001/index.html`
+- Для phpMyAdmin используйте установленный у вас стек (XAMPP/MAMP/классический LAMP).
