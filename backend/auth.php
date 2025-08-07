@@ -7,17 +7,34 @@ function current_user() {
 }
 function is_admin(): bool { return isset($_SESSION['user']) && $_SESSION['user']['role'] === 'admin'; }
 
+function check_forced_logout() {
+    if (!current_user()) return;
+    $conn = db_connect();
+    $stmt = $conn->prepare('SELECT force_logout FROM users WHERE id = ?');
+    $stmt->bind_param('i', $_SESSION['user']['id']);
+    $stmt->execute();
+    $res = $stmt->get_result()->fetch_assoc();
+    if ($res && (int)$res['force_logout'] === 1) {
+        logout();
+    }
+}
+
 function login($email, $password): bool {
     $conn = db_connect();
-    $stmt = $conn->prepare('SELECT id, email, password_hash, name, phone, role FROM users WHERE email = ? LIMIT 1');
+    $stmt = $conn->prepare('SELECT id, email, password_hash, name, phone, role, force_logout FROM users WHERE email = ? LIMIT 1');
     $stmt->bind_param('s', $email);
     $stmt->execute();
     $res = $stmt->get_result();
     $user = $res->fetch_assoc();
     if (!$user) return false;
-    // Passwords hashed with SHA2 in seed for simplicity; accept SHA2
     $sha2 = hash('sha256', $password);
     if (!hash_equals($user['password_hash'], $sha2)) return false;
+    // clear forced flag on successful login
+    if ((int)$user['force_logout'] === 1) {
+        $stmt = $conn->prepare('UPDATE users SET force_logout = 0 WHERE id = ?');
+        $stmt->bind_param('i', $user['id']);
+        $stmt->execute();
+    }
     $_SESSION['user'] = [
         'id' => (int)$user['id'],
         'email' => $user['email'],

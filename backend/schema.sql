@@ -34,3 +34,23 @@ CREATE TABLE IF NOT EXISTS reservations (
 INSERT INTO users (email, password_hash, name, phone, role) VALUES
 ('admin@noir.local', SHA2('admin123', 256), 'Администратор', NULL, 'admin')
 ON DUPLICATE KEY UPDATE email=email;
+
+-- Extend users with force_logout flag
+ALTER TABLE users ADD COLUMN IF NOT EXISTS force_logout TINYINT(1) NOT NULL DEFAULT 0;
+
+-- Menu tables
+CREATE TABLE IF NOT EXISTS menu_categories (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  title VARCHAR(190) NOT NULL,
+  position INT NOT NULL DEFAULT 0
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS menu_items (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  category_id INT UNSIGNED NOT NULL,
+  name VARCHAR(190) NOT NULL,
+  description TEXT NULL,
+  price DECIMAL(10,2) NOT NULL DEFAULT 0,
+  position INT NOT NULL DEFAULT 0,
+  CONSTRAINT fk_menu_item_cat FOREIGN KEY (category_id) REFERENCES menu_categories(id) ON DELETE CASCADE
+) ENGINE=InnoDB;
