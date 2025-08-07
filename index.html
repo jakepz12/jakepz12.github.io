@@ -1,94 +1,19 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="color-scheme" content="dark light" />
-  <title>NOIR — Современный ресторан</title>
-  <link rel="stylesheet" href="css/main.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <header class="header">
-    <div class="container nav">
-      <div class="nav__logo">NOIR</div>
-      <nav class="nav__links" aria-label="Основная навигация">
-        <a class="nav__link" href="index.html">Главная</a>
-        <a class="nav__link" href="pages/menu.html">Меню</a>
-        <a class="nav__link" href="pages/about.html">О нас</a>
-        <a class="nav__link" href="pages/gallery.html">Галерея</a>
-        <a class="nav__link" href="pages/reservations.html">Бронирование</a>
-        <a class="nav__link" href="pages/contact.html">Контакты</a>
-      </nav>
-    </div>
-  </header>
-
-  <main>
-    <section class="hero" id="home">
-      <canvas class="hero__canvas" id="hero-canvas"></canvas>
-      <div class="hero__overlay container">
-        <p class="hero__kicker reveal">Ресторан современной кухни</p>
-        <h1 class="hero__title reveal">Черно‑белая эстетика, чистый вкус</h1>
-        <p class="hero__subtitle reveal">Авторская кухня, локальные продукты и высокий сервис.
-          Приезжайте за впечатлениями — мы создаем их ежедневно.</p>
-        <div class="hero__ctas reveal">
-          <a class="btn btn--primary magnetic" href="pages/reservations.html">Забронировать</a>
-          <a class="btn btn--ghost magnetic" href="pages/menu.html">Смотреть меню</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container">
-        <div class="section__head">
-          <h2 class="section__title reveal">Подпись Шефа</h2>
-          <p class="section__desc reveal">Наша команда соединяет технику высокой кухни с локальными
-            сезонными ингредиентами, чтобы подчеркнуть глубину вкуса без лишнего цвета.</p>
-        </div>
-        <div class="grid">
-          <article class="card reveal">
-            <div class="card__media"><img src="vitali-adutskevich-Fy4X_cp0dSk-unsplash.jpg" alt="Блюдо 1" loading="lazy"></div>
-            <h3 class="card__title">Тартар из мраморной говядины</h3>
-            <p class="card__text">Каперсы, соус понзу, ароматные травы</p>
-          </article>
-          <article class="card reveal">
-            <div class="card__media"><img src="vitali-adutskevich-Fy4X_cp0dSk-unsplash.jpg" alt="Блюдо 2" loading="lazy"></div>
-            <h3 class="card__title">Гребешок на углях</h3>
-            <p class="card__text">Цветная капуста, черный кунжут, масло юдзу</p>
-          </article>
-          <article class="card reveal">
-            <div class="card__media"><img src="vitali-adutskevich-Fy4X_cp0dSk-unsplash.jpg" alt="Блюдо 3" loading="lazy"></div>
-            <h3 class="card__title">Десерт «Нуар»</h3>
-            <p class="card__text">Тонкий шоколад, ваниль, легкая дымка</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container center">
-        <h2 class="section__title reveal">Откройте для себя NOIR</h2>
-        <p class="section__desc reveal" style="margin: 0 auto">Мы вдохновляемся эстетикой лучших ресторанов мира,
-          сохраняя собственный характер: минимализм, точность и уважение к продукту.</p>
-        <div class="hero__ctas" style="margin-top: 24px;">
-          <a class="btn magnetic" href="pages/about.html">Подробнее о нас</a>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
     <div class="container">
-      <div class="footer__top">
-        <div>NOIR</div>
-        <div class="muted">Ежедневно 12:00 — 23:00</div>
-      </div>
-      <div class="footer__bottom">© NOIR, 2025</div>
+        <p class="gallery-name">Первая галлерея</p>
+        <div class="gallery">
+            <img class="gallery__item" src="img/vitali-adutskevich-Fy4X_cp0dSk-unsplash.jpg" alt="photo">
+            <img class="gallery__item" src="img/vitali-adutskevich-Fy4X_cp0dSk-unsplash.jpg" alt="photo">
+            <img class="gallery__item" src="img/vitali-adutskevich-Fy4X_cp0dSk-unsplash.jpg" alt="photo">
+        </div>
     </div>
-  </footer>
-
-  <script src="js/main.js"></script>
-  <script src="js/scroll-animations.js"></script>
-  <script src="js/ui.js"></script>
-  <script src="js/canvas-hero.js"></script>
 </body>
 </html>
