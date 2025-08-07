@@ -2,7 +2,7 @@ NOIR — Черно‑белый ресторанный сайт
 
 Страницы:
 - Главная: `index.html`
-- Меню: `pages/menu.html`
+- Меню: `pages/menu.php`
 - О нас: `pages/about.html`
 - Галерея: `pages/gallery.html`
 - Бронирование: `pages/reservations.html`
@@ -32,7 +32,7 @@ NOIR — Черно‑белый ресторанный сайт
    - Вход: `pages/login.php`
    - Личный кабинет: `pages/account.php`
    - Бронирование (API): `backend/reservations.php`
-   - Админ: `pages/admin/index.php`, `pages/admin/users.php`
+   - Админ: `pages/admin/index.php`, `pages/admin/users.php`, `pages/admin/menu.php`
 
 Запуск с PHP (локально)
 - Поднимите PHP dev-сервер из корня проекта:
