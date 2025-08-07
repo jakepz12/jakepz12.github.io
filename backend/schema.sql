@@ -63,3 +63,16 @@ CREATE TABLE IF NOT EXISTS menu_items (
   position INT NOT NULL DEFAULT 0,
   CONSTRAINT fk_menu_item_cat FOREIGN KEY (category_id) REFERENCES menu_categories(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
+
+-- Support requests
+CREATE TABLE IF NOT EXISTS support_requests (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  user_id INT UNSIGNED NULL,
+  name VARCHAR(190) NOT NULL,
+  email VARCHAR(190) NOT NULL,
+  subject VARCHAR(255) NULL,
+  message TEXT NOT NULL,
+  status ENUM('new','answered') NOT NULL DEFAULT 'new',
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  CONSTRAINT fk_support_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
+) ENGINE=InnoDB;

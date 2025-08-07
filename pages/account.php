@@ -25,6 +25,7 @@ $reservations = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
         <a class="nav__link" href="../index.html">Главная</a>
         <a class="nav__link" href="menu.html">Меню</a>
         <a class="nav__link" href="account.php">Кабинет</a>
+        <a class="nav__link" href="support.html">Поддержка</a>
         <?php if (is_admin()): ?><a class="nav__link" href="/pages/admin/index.php">Админ</a><?php endif; ?>
       </nav>
     </div>

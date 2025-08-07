@@ -28,6 +28,7 @@ if ($cats) {
         <a class="nav__link" href="gallery.html">Галерея</a>
         <a class="nav__link" href="reservations.html">Бронирование</a>
         <a class="nav__link" href="contact.html">Контакты</a>
+        <a class="nav__link" href="support.html">Поддержка</a>
       </nav>
     </div>
   </header>

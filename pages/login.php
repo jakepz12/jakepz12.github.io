@@ -30,6 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <a class="nav__link" href="menu.html">Меню</a>
         <a class="nav__link" href="login.php">Вход</a>
         <a class="nav__link" href="register.php">Регистрация</a>
+        <a class="nav__link" href="support.html">Поддержка</a>
       </nav>
     </div>
   </header>
