@@ -32,35 +32,67 @@ document.addEventListener('DOMContentLoaded', () => {
       const res = await fetch('../backend/session.php').catch(()=>null) || await fetch('backend/session.php');
       if (!res || !res.ok) return;
       const json = await res.json();
-      if (!json.authenticated) return;
       const nav = document.querySelector('.nav__links');
       if (!nav) return;
-      // hide login/register if present
-      Array.from(nav.querySelectorAll('a.nav__link')).forEach(a => {
+
+      const hasLink = (hrefEnds) => Array.from(nav.querySelectorAll('a.nav__link')).some(a => (a instanceof HTMLAnchorElement) && (a.getAttribute('href') || '').endsWith(hrefEnds));
+      const removeIfExists = (hrefEnds) => Array.from(nav.querySelectorAll('a.nav__link')).forEach(a => {
         if (!(a instanceof HTMLAnchorElement)) return;
         const href = a.getAttribute('href') || '';
-        if (href.endsWith('/pages/login.php') || href.endsWith('pages/login.php') || href.endsWith('/pages/register.php') || href.endsWith('pages/register.php')) {
-          a.remove();
-        }
+        if (href.endsWith(hrefEnds)) a.remove();
       });
-      // append account/admin/logout
-      const accountLink = document.createElement('a');
-      accountLink.className = 'nav__link';
-      accountLink.href = '/pages/account.php';
-      accountLink.textContent = 'Кабинет';
-      nav.appendChild(accountLink);
-      if (json.user && json.user.role === 'admin') {
-        const adminLink = document.createElement('a');
-        adminLink.className = 'nav__link';
-        adminLink.href = '/pages/admin/index.php';
-        adminLink.textContent = 'Админ';
-        nav.appendChild(adminLink);
+
+      if (json.authenticated) {
+        // hide login/register if present
+        removeIfExists('/pages/login.php');
+        removeIfExists('pages/login.php');
+        removeIfExists('/pages/register.php');
+        removeIfExists('pages/register.php');
+        // append account/admin/logout
+        if (!hasLink('/pages/account.php') && !hasLink('pages/account.php')) {
+          const accountLink = document.createElement('a');
+          accountLink.className = 'nav__link';
+          accountLink.href = '/pages/account.php';
+          accountLink.textContent = 'Кабинет';
+          nav.appendChild(accountLink);
+        }
+        if (json.user && json.user.role === 'admin' && !hasLink('/pages/admin/index.php') && !hasLink('pages/admin/index.php')) {
+          const adminLink = document.createElement('a');
+          adminLink.className = 'nav__link';
+          adminLink.href = '/pages/admin/index.php';
+          adminLink.textContent = 'Админ';
+          nav.appendChild(adminLink);
+        }
+        if (!hasLink('/pages/logout.php') && !hasLink('pages/logout.php')) {
+          const logoutLink = document.createElement('a');
+          logoutLink.className = 'nav__link';
+          logoutLink.href = '/pages/logout.php';
+          logoutLink.textContent = 'Выйти';
+          nav.appendChild(logoutLink);
+        }
+      } else {
+        // not authenticated: remove account/admin/logout if present, add login/register if missing
+        removeIfExists('/pages/account.php');
+        removeIfExists('pages/account.php');
+        removeIfExists('/pages/admin/index.php');
+        removeIfExists('pages/admin/index.php');
+        removeIfExists('/pages/logout.php');
+        removeIfExists('pages/logout.php');
+        if (!hasLink('/pages/login.php') && !hasLink('pages/login.php')) {
+          const loginLink = document.createElement('a');
+          loginLink.className = 'nav__link';
+          loginLink.href = '/pages/login.php';
+          loginLink.textContent = 'Вход';
+          nav.appendChild(loginLink);
+        }
+        if (!hasLink('/pages/register.php') && !hasLink('pages/register.php')) {
+          const regLink = document.createElement('a');
+          regLink.className = 'nav__link';
+          regLink.href = '/pages/register.php';
+          regLink.textContent = 'Регистрация';
+          nav.appendChild(regLink);
+        }
       }
-      const logoutLink = document.createElement('a');
-      logoutLink.className = 'nav__link';
-      logoutLink.href = '/pages/logout.php';
-      logoutLink.textContent = 'Выйти';
-      nav.appendChild(logoutLink);
     } catch {}
   })();
 
