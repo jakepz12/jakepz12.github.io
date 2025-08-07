@@ -35,6 +35,15 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!json.authenticated) return;
       const nav = document.querySelector('.nav__links');
       if (!nav) return;
+      // hide login/register if present
+      Array.from(nav.querySelectorAll('a.nav__link')).forEach(a => {
+        if (!(a instanceof HTMLAnchorElement)) return;
+        const href = a.getAttribute('href') || '';
+        if (href.endsWith('/pages/login.php') || href.endsWith('pages/login.php') || href.endsWith('/pages/register.php') || href.endsWith('pages/register.php')) {
+          a.remove();
+        }
+      });
+      // append account/admin/logout
       const accountLink = document.createElement('a');
       accountLink.className = 'nav__link';
       accountLink.href = '/pages/account.php';
