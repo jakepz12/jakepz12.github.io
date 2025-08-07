@@ -36,7 +36,16 @@ INSERT INTO users (email, password_hash, name, phone, role) VALUES
 ON DUPLICATE KEY UPDATE email=email;
 
 -- Extend users with force_logout flag
-ALTER TABLE users ADD COLUMN IF NOT EXISTS force_logout TINYINT(1) NOT NULL DEFAULT 0;
+-- Compatibility-safe ADD COLUMN
+SET @col_exists := (
+  SELECT COUNT(*) FROM information_schema.COLUMNS
+  WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = 'users' AND COLUMN_NAME = 'force_logout'
+);
+SET @ddl := IF(@col_exists = 0,
+  'ALTER TABLE users ADD COLUMN force_logout TINYINT(1) NOT NULL DEFAULT 0',
+  'SELECT 1'
+);
+PREPARE stmt FROM @ddl; EXECUTE stmt; DEALLOCATE PREPARE stmt;
 
 -- Menu tables
 CREATE TABLE IF NOT EXISTS menu_categories (
